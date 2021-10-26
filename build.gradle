@@ -1,0 +1,42 @@
+plugins {
+  id "groovy-gradle-plugin"
+}
+
+group = "maia"
+version = "1.0-SNAPSHOT"
+
+repositories {
+  gradlePluginPortal()
+}
+
+sourceSets {
+  main.groovy.srcDirs = ['src']
+}
+
+dependencies {
+  implementation "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+  implementation "org.jetbrains.kotlinx:kotlinx-benchmark-plugin:$kotlinxBenchmarkVersion"
+  implementation "maia:maia-build"
+}
+
+/*
+
+// Start at an attempt to propagate versions to dependent builds
+// Taken from: https://discuss.gradle.org/t/how-can-a-custom-gradle-plugin-determine-its-own-version/36761/3
+
+task generateResources {
+    ext {
+        propFile = file("$buildDir/generated/myplugin.properties")
+    }
+    outputs.file propFile
+    doLast {
+        mkdir propFile.parentFile
+        propFile.text = "kotlinVersion=$kotlinVersion\n" +
+            "kotlinxBenchmarkVersion=$kotlinxBenchmarkVersion"
+    }
+}
+
+processResources {
+    from files(generateResources)
+}
+*/
